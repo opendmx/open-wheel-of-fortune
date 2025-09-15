@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wheel of Fortune</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Wheel of Fortune 🎯</h1>
+            <p>Add names to the list and spin the wheel to find your winner!</p>
+        </header>
+
+        <main>
+            <div class="app-layout">
+                <!-- Wheel Section -->
+                <section class="wheel-section">
+                    <div class="wheel-container">
+                        <canvas id="wheelCanvas" width="400" height="400"></canvas>
+                        <div class="wheel-pointer"></div>
+                        <button id="spinButton" class="spin-button">
+                            <span class="spin-text">SPIN!</span>
+                        </button>
+                    </div>
+                    <div id="winnerDisplay" class="winner-display hidden">
+                        <div class="celebration">🎉</div>
+                        <h2>Winner!</h2>
+                        <div id="winnerName" class="winner-name"></div>
+                        <div class="celebration">🎊</div>
+                    </div>
+                </section>
+
+                <!-- List Section -->
+                <section class="list-section">
+                    <div class="list-header">
+                        <h3>Participants (<span id="entryCount">0</span>/200)</h3>
+                        <div class="list-controls">
+                            <button id="clearAllButton" class="clear-button">Clear All</button>
+                        </div>
+                    </div>
+                    
+                    <div class="add-entry">
+                        <input type="text" id="nameInput" placeholder="Enter a name..." maxlength="50">
+                        <button id="addButton" class="add-button">Add</button>
+                    </div>
+
+                    <div class="bulk-add">
+                        <textarea id="bulkInput" placeholder="Paste multiple names here (one per line)..." rows="4"></textarea>
+                        <button id="bulkAddButton" class="add-button">Add All</button>
+                    </div>
+
+                    <div class="entries-container">
+                        <ul id="entriesList" class="entries-list"></ul>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <div id="celebrationOverlay" class="celebration-overlay hidden">
+        <div class="fireworks">
+            <div class="firework"></div>
+            <div class="firework"></div>
+            <div class="firework"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
