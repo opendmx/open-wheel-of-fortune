@@ -166,8 +166,8 @@ class WheelOfFortune {
             this.ctx.closePath();
             this.ctx.fillStyle = colors[index % colors.length];
             this.ctx.fill();
-            this.ctx.strokeStyle = '#fff';
-            this.ctx.lineWidth = 2;
+            this.ctx.strokeStyle = '#000';
+            this.ctx.lineWidth = 3;
             this.ctx.stroke();
 
             // Draw text
@@ -179,8 +179,18 @@ class WheelOfFortune {
             this.ctx.save();
             this.ctx.translate(textX, textY);
             this.ctx.rotate(textAngle + Math.PI / 2);
-            this.ctx.fillStyle = '#fff';
-            this.ctx.font = 'bold 12px Arial';
+            
+            // Use contrasting text color based on segment color
+            const segmentColor = colors[index % colors.length];
+            if (segmentColor === '#000000') {
+                this.ctx.fillStyle = '#fff';
+            } else if (segmentColor === '#ffffff') {
+                this.ctx.fillStyle = '#000';
+            } else {
+                this.ctx.fillStyle = '#000';
+            }
+            
+            this.ctx.font = 'bold 14px "Helvetica Neue", Arial, sans-serif';
             this.ctx.textAlign = 'center';
             this.ctx.textBaseline = 'middle';
             
@@ -196,20 +206,30 @@ class WheelOfFortune {
 
         // Draw center circle
         this.ctx.beginPath();
-        this.ctx.arc(centerX, centerY, 20, 0, 2 * Math.PI);
-        this.ctx.fillStyle = '#333';
+        this.ctx.arc(centerX, centerY, 25, 0, 2 * Math.PI);
+        this.ctx.fillStyle = '#000';
         this.ctx.fill();
+        this.ctx.strokeStyle = '#ffd700';
+        this.ctx.lineWidth = 4;
+        this.ctx.stroke();
     }
 
     generateColors(count) {
-        const colors = [];
-        const hueStep = 360 / Math.max(count, 8); // Minimum 8 colors for variety
+        // Bauhaus primary colors: red, blue, yellow, plus black and white
+        const bauhausColors = [
+            '#e60000',  // Red
+            '#0051ba',  // Blue
+            '#ffd700',  // Yellow
+            '#000000',  // Black
+            '#ffffff',  // White
+            '#e60000',  // Red (repeat for variety)
+            '#0051ba',  // Blue (repeat)
+            '#ffd700'   // Yellow (repeat)
+        ];
         
+        const colors = [];
         for (let i = 0; i < count; i++) {
-            const hue = (i * hueStep) % 360;
-            const saturation = 70 + (i % 3) * 10; // Vary saturation
-            const lightness = 50 + (i % 2) * 15; // Vary lightness
-            colors.push(`hsl(${hue}, ${saturation}%, ${lightness}%)`);
+            colors.push(bauhausColors[i % bauhausColors.length]);
         }
         
         return colors;
